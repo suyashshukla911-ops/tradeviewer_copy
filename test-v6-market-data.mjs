@@ -508,13 +508,7 @@ async function run() {
   await client.screenshot('v6_05_provider_error_state.png');
   console.log('✓ Provider Error state verified');
 
-  // Restore MockMarketDataProvider for UI regressions
-  await client.evaluate(`
-    (() => {
-      const mock = new window.marketDataService.constructor.prototype.constructor.prototype;
-      // Or restore via page reload
-    })()
-  `);
+  // Restore MockMarketDataProvider by reloading page
   await client.send('Page.reload');
   await sleep(1500);
 
