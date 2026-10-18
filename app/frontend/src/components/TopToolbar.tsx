@@ -3,6 +3,7 @@ import type { ChartType, Timeframe } from '../chart/models/Candle';
 import type { SymbolInfo } from '../data/symbolCatalog';
 import { TimeframeSelector } from './TimeframeSelector';
 import { ChartTypeMenu } from './ChartTypeMenu';
+import { LayoutSelector, type ChartLayoutType } from './LayoutSelector';
 
 export interface TopToolbarProps {
   symbolInfo: SymbolInfo;
@@ -17,6 +18,11 @@ export interface TopToolbarProps {
   onIndicatorsClick: () => void;
   onSettingsClick: () => void;
   onFullscreenClick: () => void;
+  activeLayout: ChartLayoutType;
+  onSelectLayout: (layout: ChartLayoutType) => void;
+  isReplayActive?: boolean;
+  onToggleReplay?: () => void;
+  onOpenTemplates?: () => void;
 }
 
 export const TopToolbar: React.FC<TopToolbarProps> = ({
@@ -32,6 +38,11 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
   onIndicatorsClick,
   onSettingsClick,
   onFullscreenClick,
+  activeLayout,
+  onSelectLayout,
+  isReplayActive,
+  onToggleReplay,
+  onOpenTemplates,
 }) => {
   return (
     <header
@@ -55,6 +66,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         type="button"
         onClick={onOpenSymbolSearch}
         title="Search symbol (Ctrl+K)"
+        className="symbol-search-trigger"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -114,7 +126,8 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
       <button
         type="button"
         onClick={onIndicatorsClick}
-        title="Technical Indicators (Coming next)"
+        title="Technical Indicators"
+        className="top-toolbar-indicators-btn"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -139,13 +152,86 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         <span>Indicators</span>
       </button>
 
+      {/* 5. V5: Replay Button */}
+      {onToggleReplay && (
+        <button
+          type="button"
+          onClick={onToggleReplay}
+          title="Toggle Replay Mode"
+          className={`top-toolbar-replay-btn ${isReplayActive ? 'active' : ''}`}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+            background: isReplayActive ? '#2962ff' : 'transparent',
+            color: isReplayActive ? '#ffffff' : '#d1d4dc',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '4px 8px',
+            fontSize: '12px',
+            fontWeight: 500,
+            cursor: 'pointer',
+          }}
+          onMouseEnter={(e) => {
+            if (!isReplayActive) e.currentTarget.style.backgroundColor = '#2a2e39';
+          }}
+          onMouseLeave={(e) => {
+            if (!isReplayActive) e.currentTarget.style.backgroundColor = 'transparent';
+          }}
+        >
+          <span style={{ fontSize: '13px' }}>⏪</span>
+          <span>Replay</span>
+        </button>
+      )}
+
+      {/* 6. V5: Templates Button */}
+      {onOpenTemplates && (
+        <button
+          type="button"
+          onClick={onOpenTemplates}
+          title="Chart Templates"
+          className="top-toolbar-templates-btn"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '5px',
+            background: 'transparent',
+            color: '#d1d4dc',
+            border: 'none',
+            borderRadius: '4px',
+            padding: '4px 8px',
+            fontSize: '12px',
+            fontWeight: 500,
+            cursor: 'pointer',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#2a2e39';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
+        >
+          <span style={{ fontSize: '13px' }}>📐</span>
+          <span>Templates</span>
+        </button>
+      )}
+
       <div style={{ flex: 1 }} />
+
+      {/* 7. V5: Layout Selector */}
+      <LayoutSelector
+        activeLayout={activeLayout}
+        onSelectLayout={onSelectLayout}
+      />
+
+      <div style={{ width: '1px', height: '20px', backgroundColor: '#2a2e39', margin: '0 2px' }} />
 
       {/* Reset View Button */}
       <button
         type="button"
         onClick={onResetView}
         title="Reset chart scale and view"
+        className="top-toolbar-reset-btn"
         style={{
           background: 'transparent',
           color: '#787b86',
@@ -171,11 +257,12 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         <span>Reset</span>
       </button>
 
-      {/* 5. Settings Button */}
+      {/* Settings Button */}
       <button
         type="button"
         onClick={onSettingsClick}
-        title="Chart Settings (Coming next)"
+        title="Chart Settings"
+        className="top-toolbar-settings-btn"
         style={{
           background: 'transparent',
           color: '#787b86',
@@ -197,11 +284,12 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         ⚙
       </button>
 
-      {/* 6. Fullscreen Button */}
+      {/* Fullscreen Button */}
       <button
         type="button"
         onClick={onFullscreenClick}
         title="Toggle Fullscreen"
+        className="top-toolbar-fullscreen-btn"
         style={{
           background: 'transparent',
           color: '#787b86',
@@ -230,6 +318,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
         type="button"
         onClick={onToggleWatchlist}
         title="Toggle Watchlist Panel"
+        className="top-toolbar-watchlist-btn"
         style={{
           background: isWatchlistOpen ? '#2a2e39' : 'transparent',
           color: isWatchlistOpen ? '#2962ff' : '#787b86',

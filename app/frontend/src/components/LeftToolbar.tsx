@@ -20,7 +20,7 @@ export const LeftToolbar: React.FC<LeftToolbarProps> = ({
 }) => {
   return (
     <aside
-      className="workspace-left-toolbar"
+      className="workspace-left-toolbar left-toolbar"
       style={{
         width: '42px',
         height: '100%',

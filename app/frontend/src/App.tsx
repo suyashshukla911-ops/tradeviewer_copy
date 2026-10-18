@@ -1,18 +1,31 @@
 import React, { useRef } from 'react';
 import { WorkspaceProvider, useWorkspace } from './context/WorkspaceContext';
-import { TradingChart, type TradingChartRef } from './components/TradingChart';
+import type { TradingChartRef } from './components/TradingChart';
 import { TopToolbar } from './components/TopToolbar';
 import { BottomToolbar } from './components/BottomToolbar';
 import { Watchlist } from './components/Watchlist';
+import { AlertsPanel } from './components/AlertsPanel';
+import { WorkspaceNav } from './components/WorkspaceNav';
+import { ReplayToolbar } from './components/ReplayToolbar';
+import { TemplatesModal } from './components/TemplatesModal';
+import { SettingsModal } from './components/SettingsModal';
 import { SymbolSearch } from './components/SymbolSearch';
 import { LeftToolbar } from './components/LeftToolbar';
 import { IndicatorMenu } from './components/IndicatorMenu';
 import { IndicatorSettings } from './components/IndicatorSettings';
+import { MultiChartArea } from './components/MultiChartArea';
 import type { Timeframe, RangeShortcut } from './chart/models/Candle';
 import './App.css';
 
 const WorkspaceContent: React.FC = () => {
   const {
+    activeLayout,
+    activeChartId,
+    charts,
+    setActiveLayout,
+    setActiveChartId,
+    updateChart,
+
     activeSymbol,
     symbolInfo,
     activeTimeframe,
@@ -27,30 +40,56 @@ const WorkspaceContent: React.FC = () => {
     drawings,
     selectedDrawingId,
     activeDrawingTool,
-    paneHeights,
     editingIndicatorId,
     toastMessage,
+
     setActiveSymbol,
     setActiveTimeframe,
     setChartType,
     setActiveRange,
-    setIsWatchlistOpen,
     setIsSymbolSearchOpen,
     setIsIndicatorMenuOpen,
     setEditingIndicatorId,
-    setPaneHeights,
-    setSelectedDrawingId,
+
     addIndicator,
     updateIndicator,
-    removeIndicator,
-    toggleIndicatorVisibility,
-    addDrawing,
-    updateDrawing,
     deleteSelectedDrawing,
     clearDrawings,
     setActiveDrawingTool,
-    showToast,
+
     toggleFullscreen,
+
+    // V5
+    alerts,
+    createAlert,
+    toggleAlert,
+    deleteAlert,
+
+    templates,
+    saveTemplate,
+    loadTemplate,
+    deleteTemplate,
+    isTemplatesOpen,
+    setIsTemplatesOpen,
+
+    isReplayActive,
+    isReplayPlaying,
+    replayIndex,
+    replaySpeed,
+    toggleReplay,
+    toggleReplayPlay,
+    stepReplayForward,
+    resetReplay,
+    setReplaySpeed,
+    exitReplay,
+
+    activePanel,
+    setActivePanel,
+    isSettingsOpen,
+    setIsSettingsOpen,
+    settings,
+    updateSettings,
+    resetWorkspaceDefaults,
   } = useWorkspace();
 
   const chartRef = useRef<TradingChartRef>(null);
@@ -80,7 +119,10 @@ const WorkspaceContent: React.FC = () => {
     });
   };
 
-  const activeEditingIndicator = activeIndicators.find((i) => i.id === editingIndicatorId) || null;
+  const activeEditingIndicator =
+    activeIndicators.find((i) => i.id === editingIndicatorId) || null;
+
+  const currentClosePrice = candles.length > 0 ? candles[candles.length - 1].close : 150;
 
   return (
     <div className="workspace-container">
@@ -93,14 +135,35 @@ const WorkspaceContent: React.FC = () => {
         chartType={chartType}
         onChartTypeChange={setChartType}
         onResetView={handleResetView}
-        onToggleWatchlist={() => setIsWatchlistOpen((prev) => !prev)}
+        onToggleWatchlist={() =>
+          setActivePanel((prev) => (prev === 'watchlist' ? 'none' : 'watchlist'))
+        }
         isWatchlistOpen={isWatchlistOpen}
         onIndicatorsClick={() => setIsIndicatorMenuOpen(true)}
-        onSettingsClick={() => showToast('Chart Settings: Appearance, Scales & Grid coming next')}
+        onSettingsClick={() => setIsSettingsOpen(true)}
         onFullscreenClick={toggleFullscreen}
+        activeLayout={activeLayout}
+        onSelectLayout={setActiveLayout}
+        isReplayActive={isReplayActive}
+        onToggleReplay={toggleReplay}
+        onOpenTemplates={() => setIsTemplatesOpen(true)}
       />
 
-      {/* 2. Main Workspace Body: Left Toolbar + Chart Surface + Watchlist Panel */}
+      {/* 2. Floating Replay Control Bar */}
+      <ReplayToolbar
+        isActive={isReplayActive}
+        isPlaying={isReplayPlaying}
+        currentIndex={replayIndex}
+        totalCandles={candles.length}
+        speed={replaySpeed}
+        onTogglePlay={toggleReplayPlay}
+        onStepForward={stepReplayForward}
+        onReset={resetReplay}
+        onChangeSpeed={setReplaySpeed}
+        onExit={exitReplay}
+      />
+
+      {/* 3. Main Workspace Body: Left Toolbar + Chart Area + Side Panels + Right Nav */}
       <div className="workspace-body">
         <LeftToolbar
           activeTool={activeDrawingTool}
@@ -112,47 +175,65 @@ const WorkspaceContent: React.FC = () => {
         />
 
         <main className="chart-main-area">
-          <TradingChart
-            ref={chartRef}
-            symbol={symbolInfo.ticker}
-            chartType={chartType}
-            timeframe={activeTimeframe}
-            candles={candles}
-            activeIndicators={activeIndicators}
-            onRemoveIndicator={removeIndicator}
-            onToggleIndicatorVisibility={toggleIndicatorVisibility}
-            onOpenIndicatorSettings={(id) => setEditingIndicatorId(id)}
-            drawings={drawings}
-            selectedDrawingId={selectedDrawingId}
-            onSelectDrawing={setSelectedDrawingId}
-            onUpdateDrawing={updateDrawing}
-            onDeleteSelectedDrawing={deleteSelectedDrawing}
-            onAddDrawing={addDrawing}
+          <MultiChartArea
+            layout={activeLayout}
+            charts={charts}
+            activeChartId={activeChartId}
+            onSelectActiveChart={setActiveChartId}
+            updateChart={updateChart}
             activeDrawingTool={activeDrawingTool}
             onDrawingToolChange={setActiveDrawingTool}
-            paneHeights={paneHeights}
-            onPaneHeightsChange={setPaneHeights}
+            onOpenIndicatorSettings={(id) => setEditingIndicatorId(id)}
+            isReplayActive={isReplayActive}
+            replayCandles={candles}
+            activeChartRef={chartRef}
           />
         </main>
 
-        {isWatchlistOpen && (
+        {/* Watchlist Side Panel */}
+        {activePanel === 'watchlist' && (
           <Watchlist
             items={watchlist}
             activeSymbol={activeSymbol}
             onSelectSymbol={handleSymbolSelect}
-            onClose={() => setIsWatchlistOpen(false)}
+            onClose={() => setActivePanel('none')}
           />
         )}
+
+        {/* Alerts Side Panel */}
+        {activePanel === 'alerts' && (
+          <AlertsPanel
+            isOpen={activePanel === 'alerts'}
+            onClose={() => setActivePanel('none')}
+            alerts={alerts}
+            currentSymbol={activeSymbol}
+            currentTimeframe={activeTimeframe}
+            currentPrice={currentClosePrice}
+            onCreateAlert={createAlert}
+            onToggleAlert={toggleAlert}
+            onDeleteAlert={deleteAlert}
+          />
+        )}
+
+        {/* Compact Right Navigation Strip */}
+        <WorkspaceNav
+          activePanel={activePanel}
+          onTogglePanel={(p) => setActivePanel((prev) => (prev === p ? 'none' : p))}
+          isReplayActive={isReplayActive}
+          onToggleReplay={toggleReplay}
+          onOpenTemplates={() => setIsTemplatesOpen(true)}
+          onOpenSettings={() => setIsSettingsOpen(true)}
+        />
       </div>
 
-      {/* 3. Bottom Workspace Toolbar */}
+      {/* 4. Bottom Workspace Toolbar */}
       <BottomToolbar
         activeRange={activeRange}
         onRangeChange={handleRangeChange}
         onResetView={handleResetView}
       />
 
-      {/* 4. Symbol Search Modal */}
+      {/* 5. Symbol Search Modal */}
       <SymbolSearch
         isOpen={isSymbolSearchOpen}
         onClose={() => setIsSymbolSearchOpen(false)}
@@ -160,7 +241,7 @@ const WorkspaceContent: React.FC = () => {
         currentSymbol={activeSymbol}
       />
 
-      {/* 5. Technical Indicator Modal */}
+      {/* 6. Technical Indicator Modal */}
       <IndicatorMenu
         isOpen={isIndicatorMenuOpen}
         onClose={() => setIsIndicatorMenuOpen(false)}
@@ -168,7 +249,7 @@ const WorkspaceContent: React.FC = () => {
         activeIndicators={activeIndicators}
       />
 
-      {/* 6. Indicator Settings Modal (V4) */}
+      {/* 7. Indicator Settings Modal */}
       <IndicatorSettings
         isOpen={!!editingIndicatorId}
         indicator={activeEditingIndicator}
@@ -176,7 +257,26 @@ const WorkspaceContent: React.FC = () => {
         onSave={updateIndicator}
       />
 
-      {/* 7. Non-intrusive Toast */}
+      {/* 8. Chart Templates Modal (V5) */}
+      <TemplatesModal
+        isOpen={isTemplatesOpen}
+        onClose={() => setIsTemplatesOpen(false)}
+        templates={templates}
+        onSaveTemplate={saveTemplate}
+        onLoadTemplate={loadTemplate}
+        onDeleteTemplate={deleteTemplate}
+      />
+
+      {/* 9. Workspace Settings Modal (V5) */}
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        settings={settings}
+        onUpdateSettings={updateSettings}
+        onResetWorkspace={resetWorkspaceDefaults}
+      />
+
+      {/* 10. Non-intrusive Toast */}
       {toastMessage && <div className="workspace-toast">{toastMessage}</div>}
     </div>
   );

@@ -196,6 +196,7 @@ export const SymbolSearch: React.FC<SymbolSearchProps> = ({
               return (
                 <div
                   key={item.ticker}
+                  className="symbol-item"
                   onClick={() => {
                     onSelectSymbol(item.ticker);
                     onClose();

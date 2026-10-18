@@ -48,6 +48,7 @@ export const TimeframeSelector: React.FC<TimeframeSelectorProps> = ({
           <button
             key={tf}
             type="button"
+            className="timeframe-button"
             onClick={() => onTimeframeChange(tf)}
             style={{
               background: isActive ? '#2962ff' : 'transparent',

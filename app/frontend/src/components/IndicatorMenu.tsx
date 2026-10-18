@@ -69,7 +69,7 @@ export const IndicatorMenu: React.FC<IndicatorMenuProps> = ({
       }}
     >
       <div
-        className="indicator-menu-modal"
+        className="indicator-menu-modal indicator-menu-dialog"
         onClick={(e) => e.stopPropagation()}
         style={{
           width: '560px',
@@ -114,6 +114,7 @@ export const IndicatorMenu: React.FC<IndicatorMenuProps> = ({
           />
           <button
             type="button"
+            className="indicator-menu-close"
             onClick={onClose}
             style={{
               background: 'transparent',

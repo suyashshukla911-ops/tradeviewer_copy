@@ -45,6 +45,7 @@ export const ChartTypeMenu: React.FC<ChartTypeMenuProps> = ({
       {/* Dropdown trigger button */}
       <button
         type="button"
+        className="chart-type-trigger"
         onClick={() => setIsOpen((prev) => !prev)}
         style={{
           display: 'flex',
@@ -95,6 +96,7 @@ export const ChartTypeMenu: React.FC<ChartTypeMenuProps> = ({
               <button
                 key={opt.type}
                 type="button"
+                className="chart-type-option"
                 data-chart-type={opt.type}
                 onClick={() => {
                   onChartTypeChange(opt.type);
