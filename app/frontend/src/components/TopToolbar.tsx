@@ -4,6 +4,7 @@ import type { SymbolInfo } from '../data/symbolCatalog';
 import { TimeframeSelector } from './TimeframeSelector';
 import { ChartTypeMenu } from './ChartTypeMenu';
 import { LayoutSelector, type ChartLayoutType } from './LayoutSelector';
+import { MarketStatusBadge } from './MarketStatusBadge';
 
 export interface TopToolbarProps {
   symbolInfo: SymbolInfo;
@@ -103,6 +104,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
           {symbolInfo.exchange}
         </span>
       </button>
+      <MarketStatusBadge />
 
       <div style={{ width: '1px', height: '20px', backgroundColor: '#2a2e39', margin: '0 2px' }} />
 

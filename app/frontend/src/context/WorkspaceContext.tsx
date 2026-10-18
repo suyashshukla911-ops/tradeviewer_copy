@@ -21,6 +21,10 @@ import type { ChartTemplate } from '../templates/ChartTemplate';
 import type { ChartLayoutType } from '../components/LayoutSelector';
 import type { WorkspacePanel } from '../components/WorkspaceNav';
 import type { WorkspaceSettings } from '../components/SettingsModal';
+import { marketDataService, MarketDataService } from '../data/services/MarketDataService';
+import type { MarketStatus } from '../data/providers/MarketDataProvider';
+import { marketBarsToCandles } from '../data/models/MarketBar';
+import { FakeRealtimeProvider } from '../data/providers/FakeRealtimeProvider';
 
 export interface PaneHeights {
   volume: number;
@@ -127,6 +131,10 @@ export interface WorkspaceContextType {
   settings: WorkspaceSettings;
   updateSettings: (newSettings: Partial<WorkspaceSettings>) => void;
   resetWorkspaceDefaults: () => void;
+
+  // V6: Market Data Architecture
+  marketStatus: MarketStatus;
+  marketDataService: MarketDataService;
 }
 
 const STORAGE_V5_KEY = 'tv_workspace_v5';
@@ -638,9 +646,54 @@ export const WorkspaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     [showToast]
   );
 
-  // V5: Replay Controls
-  const rawCandles = useMemo(() => {
-    return generateMockCandles(activeSymbol, activeTimeframe);
+  // V6: Market Data Service Subscription for Active Chart
+  const [marketStatus, setMarketStatus] = useState<MarketStatus>(
+    marketDataService.getMarketStatus()
+  );
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).marketDataService = marketDataService;
+      (window as any).FakeRealtimeProvider = FakeRealtimeProvider;
+    }
+    return marketDataService.onStatusChange((newStatus) => {
+      setMarketStatus(newStatus);
+    });
+  }, []);
+
+  const [rawCandles, setRawCandles] = useState<Candle[]>(() => {
+    const cached = marketDataService.getCachedBars(activeSymbol, activeTimeframe);
+    return cached ? marketBarsToCandles(cached) : generateMockCandles(activeSymbol, activeTimeframe);
+  });
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    marketDataService
+      .getHistoricalBars(activeSymbol, activeTimeframe)
+      .then((bars) => {
+        if (isCurrent) {
+          setRawCandles(marketBarsToCandles(bars));
+        }
+      })
+      .catch((err) => {
+        console.warn('MarketDataService error:', err);
+      });
+
+    const subId = marketDataService.subscribeBars(
+      activeSymbol,
+      activeTimeframe,
+      (bars) => {
+        if (isCurrent) {
+          setRawCandles(marketBarsToCandles(bars));
+        }
+      }
+    );
+
+    return () => {
+      isCurrent = false;
+      marketDataService.unsubscribeBars(subId);
+    };
   }, [activeSymbol, activeTimeframe]);
 
   const toggleReplay = useCallback(() => {
@@ -862,6 +915,10 @@ export const WorkspaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     settings,
     updateSettings,
     resetWorkspaceDefaults,
+
+    // V6
+    marketStatus,
+    marketDataService,
   };
 
   return <WorkspaceContext.Provider value={value}>{children}</WorkspaceContext.Provider>;

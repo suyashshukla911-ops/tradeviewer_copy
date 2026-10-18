@@ -1,10 +1,11 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { TradingChart, type TradingChartRef } from './TradingChart';
 import type { ChartLayoutType } from './LayoutSelector';
 import type { ChartInstanceState, PaneHeights } from '../context/WorkspaceContext';
 import type { Drawing } from '../chart/drawings/Drawing';
 import type { DrawingToolType } from '../chart/drawings/DrawingManager';
-import { generateMockCandles } from '../data/mockMarketData';
+import { marketDataService } from '../data/services/MarketDataService';
+import { marketBarsToCandles } from '../data/models/MarketBar';
 import type { Candle } from '../chart/models/Candle';
 
 export interface MultiChartAreaProps {
@@ -162,13 +163,48 @@ const ChartCell = React.forwardRef<TradingChartRef, ChartCellProps>(
     },
     ref
   ) => {
-    // Generate deterministic candles for this specific chart
+    // Subscribe to marketDataService for this specific chart cell
+    const [liveBars, setLiveBars] = useState<Candle[]>(() => {
+      const cached = marketDataService.getCachedBars(chart.symbol, chart.timeframe);
+      return cached ? marketBarsToCandles(cached) : [];
+    });
+
+    useEffect(() => {
+      let isCurrent = true;
+
+      marketDataService
+        .getHistoricalBars(chart.symbol, chart.timeframe)
+        .then((bars) => {
+          if (isCurrent) {
+            setLiveBars(marketBarsToCandles(bars));
+          }
+        })
+        .catch((err) => {
+          console.warn(`Failed to fetch bars for ${chart.symbol} ${chart.timeframe}:`, err);
+        });
+
+      const subId = marketDataService.subscribeBars(
+        chart.symbol,
+        chart.timeframe,
+        (bars) => {
+          if (isCurrent) {
+            setLiveBars(marketBarsToCandles(bars));
+          }
+        }
+      );
+
+      return () => {
+        isCurrent = false;
+        marketDataService.unsubscribeBars(subId);
+      };
+    }, [chart.symbol, chart.timeframe]);
+
     const candles = useMemo(() => {
       if (isReplayActive && replayCandles.length > 0) {
         return replayCandles;
       }
-      return generateMockCandles(chart.symbol, chart.timeframe);
-    }, [chart.symbol, chart.timeframe, isReplayActive, replayCandles]);
+      return liveBars;
+    }, [isReplayActive, replayCandles, liveBars]);
 
     const handleRemoveIndicator = (indId: string) => {
       updateChart(chart.id, {
