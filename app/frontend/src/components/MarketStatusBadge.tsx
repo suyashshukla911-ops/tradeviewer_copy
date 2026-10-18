@@ -69,6 +69,7 @@ export const MarketStatusBadge: React.FC<MarketStatusBadgeProps> = ({ status: pr
   return (
     <div
       className={`market-status-badge market-status-${status.toLowerCase()}`}
+      data-testid="market-status-badge"
       title={config.tooltip}
       style={{
         display: 'inline-flex',

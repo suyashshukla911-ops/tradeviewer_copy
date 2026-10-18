@@ -10,3 +10,6 @@ rea-workspace/chrome-profile
 rea-workspace/evidence/screenshots
 .chrome-test-p
 .chrome-test*
+.env
+.env.local
+.env.*.local

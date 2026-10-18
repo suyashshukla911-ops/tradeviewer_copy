@@ -3,7 +3,7 @@ import type {
   ConnectionState,
   MarketStatus,
 } from '../providers/MarketDataProvider';
-import { MockMarketDataProvider } from '../providers/MockMarketDataProvider';
+import { MarketDataProviderFactory } from '../providers/MarketDataProviderFactory';
 import type { MarketBar } from '../models/MarketBar';
 import type { SymbolInfo } from '../models/SymbolInfo';
 import type { Timeframe, RangeShortcut } from '../../chart/models/Candle';
@@ -28,7 +28,7 @@ export class MarketDataService {
   private providerUnsubState: (() => void) | null = null;
 
   constructor(initialProvider?: MarketDataProvider) {
-    this.provider = initialProvider || new MockMarketDataProvider();
+    this.provider = initialProvider || MarketDataProviderFactory.createProvider();
     this.bindProviderStateListener();
   }
 
@@ -70,6 +70,11 @@ export class MarketDataService {
     }
 
     this.notifyStatusListeners(this.provider.status, this.provider.getConnectionState());
+  }
+
+  public setProviderFromConfig(configOverride?: Partial<import('../../config/marketDataConfig').MarketDataConfig>): void {
+    const newProvider = MarketDataProviderFactory.createProvider(configOverride);
+    this.setProvider(newProvider);
   }
 
   public getMarketStatus(): MarketStatus {

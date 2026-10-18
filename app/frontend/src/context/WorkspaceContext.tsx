@@ -25,6 +25,10 @@ import { marketDataService, MarketDataService } from '../data/services/MarketDat
 import type { MarketStatus } from '../data/providers/MarketDataProvider';
 import { marketBarsToCandles } from '../data/models/MarketBar';
 import { FakeRealtimeProvider } from '../data/providers/FakeRealtimeProvider';
+import { RealMarketDataProvider } from '../data/providers/RealMarketDataProvider';
+import { MockMarketDataProvider } from '../data/providers/MockMarketDataProvider';
+import { MarketDataProviderFactory } from '../data/providers/MarketDataProviderFactory';
+import { getMarketDataConfig, setMarketDataConfig, resetMarketDataConfig } from '../config/marketDataConfig';
 
 export interface PaneHeights {
   volume: number;
@@ -655,6 +659,12 @@ export const WorkspaceProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     if (typeof window !== 'undefined') {
       (window as any).marketDataService = marketDataService;
       (window as any).FakeRealtimeProvider = FakeRealtimeProvider;
+      (window as any).RealMarketDataProvider = RealMarketDataProvider;
+      (window as any).MockMarketDataProvider = MockMarketDataProvider;
+      (window as any).MarketDataProviderFactory = MarketDataProviderFactory;
+      (window as any).getMarketDataConfig = getMarketDataConfig;
+      (window as any).setMarketDataConfig = setMarketDataConfig;
+      (window as any).resetMarketDataConfig = resetMarketDataConfig;
     }
     return marketDataService.onStatusChange((newStatus) => {
       setMarketStatus(newStatus);
