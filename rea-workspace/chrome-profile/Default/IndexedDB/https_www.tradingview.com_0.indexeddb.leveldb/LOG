@@ -1,0 +1,6 @@
+2026/10/18-10:23:34.757 2a98 Creating DB D:\TradingViewClone\rea-workspace\chrome-profile\Default\IndexedDB\https_www.tradingview.com_0.indexeddb.leveldb since it was missing.
+2026/10/18-10:23:34.762 2a98 Reusing MANIFEST D:\TradingViewClone\rea-workspace\chrome-profile\Default\IndexedDB\https_www.tradingview.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/10/18-11:41:27.932 152c Level-0 table #5: started
+2026/10/18-11:41:27.940 152c Level-0 table #5: 2397 bytes OK
+2026/10/18-11:41:27.947 152c Delete type=0 #3
+2026/10/18-11:41:27.948 152c Manual compaction at level-0 from (begin) .. (end); will stop at (end)

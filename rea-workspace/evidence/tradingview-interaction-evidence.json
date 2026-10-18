@@ -1,0 +1,664 @@
+{
+  "baseline": {
+    "screenshot": {
+      "name": "00_clean_baseline",
+      "file": "00_clean_baseline.png",
+      "bytes": 94071,
+      "sha256": "e125c3762c223575571415845030605a6fed4716d076a23918c25bb083d95726"
+    },
+    "state": {
+      "legend_lines": [
+        "A",
+        "Apple Inc",
+        "1D",
+        "NASDAQ",
+        "O",
+        "346.09",
+        "H",
+        "347.82",
+        "L",
+        "340.46",
+        "C",
+        "343.46",
+        "+1.46 (+0.43%)",
+        "343.46",
+        "SELL",
+        "0.00",
+        "343.46",
+        "BUY",
+        "Vol",
+        "59.95\u202fM"
+      ],
+      "timeAxis": "",
+      "priceAxis": "",
+      "active_timeframe": ""
+    }
+  },
+  "crosshair_movement": {
+    "move_from_baseline_to_300_250": {
+      "plot_area": {
+        "changed_pixels": 10218,
+        "total_pixels": 282720,
+        "pct_changed": 3.61
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 0,
+        "total_pixels": 24492,
+        "pct_changed": 0.0
+      }
+    },
+    "move_from_300_250_to_450_320": {
+      "plot_area": {
+        "changed_pixels": 20403,
+        "total_pixels": 282720,
+        "pct_changed": 7.22
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 0,
+        "total_pixels": 24492,
+        "pct_changed": 0.0
+      }
+    },
+    "legend_at_300_250": [
+      "A",
+      "Apple Inc",
+      "1D",
+      "NASDAQ",
+      "O",
+      "346.09"
+    ],
+    "legend_at_450_320": [
+      "A",
+      "Apple Inc",
+      "1D",
+      "NASDAQ",
+      "O",
+      "346.09"
+    ],
+    "screenshots": [
+      {
+        "name": "01_crosshair_at_300_250",
+        "file": "01_crosshair_at_300_250.png",
+        "bytes": 94987,
+        "sha256": "6588a8899f250539321df2011b858cd533069e1beea37fcba7a67e32eeaef023"
+      },
+      {
+        "name": "01_crosshair_at_450_320",
+        "file": "01_crosshair_at_450_320.png",
+        "bytes": 94909,
+        "sha256": "c003ccc866bd2ac051ea4b788df736fe251332c21a310fce97d41c38fc90fd44"
+      }
+    ]
+  },
+  "mouse_movement_exit": {
+    "diff_on_exit": {
+      "plot_area": {
+        "changed_pixels": 10185,
+        "total_pixels": 282720,
+        "pct_changed": 3.6
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 64,
+        "total_pixels": 24492,
+        "pct_changed": 0.26
+      }
+    },
+    "legend_on_exit": [
+      "A",
+      "Apple Inc",
+      "1D",
+      "NASDAQ",
+      "O",
+      "346.09"
+    ],
+    "screenshot": {
+      "name": "02_mouse_exited_chart",
+      "file": "02_mouse_exited_chart.png",
+      "bytes": 94055,
+      "sha256": "025ffa100c1ffc3605efa372c9caccd86250573b764ff1518c564408d2a1c8a0"
+    }
+  },
+  "horizontal_panning": {
+    "drag_vector": {
+      "x1": 400,
+      "y1": 280,
+      "x2": 250,
+      "y2": 280
+    },
+    "diff": {
+      "plot_area": {
+        "changed_pixels": 0,
+        "total_pixels": 282720,
+        "pct_changed": 0.0
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 156,
+        "total_pixels": 24492,
+        "pct_changed": 0.64
+      }
+    },
+    "legend": [
+      "A",
+      "Apple Inc",
+      "1D",
+      "NASDAQ",
+      "O",
+      "346.09"
+    ],
+    "screenshots": [
+      {
+        "name": "03_pan_pre",
+        "file": "03_pan_pre.png",
+        "bytes": 94055,
+        "sha256": "025ffa100c1ffc3605efa372c9caccd86250573b764ff1518c564408d2a1c8a0"
+      },
+      {
+        "name": "03_pan_post",
+        "file": "03_pan_post.png",
+        "bytes": 94100,
+        "sha256": "54c05f6718b235018d0d1953281adf958526781ce4d737b2c4d9c9ce18ebd200"
+      }
+    ]
+  },
+  "mouse_wheel_zoom": {
+    "diff_zoom_in": {
+      "plot_area": {
+        "changed_pixels": 0,
+        "total_pixels": 282720,
+        "pct_changed": 0.0
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 70,
+        "total_pixels": 24492,
+        "pct_changed": 0.29
+      }
+    },
+    "diff_zoom_out": {
+      "plot_area": {
+        "changed_pixels": 21532,
+        "total_pixels": 282720,
+        "pct_changed": 7.62
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 1307,
+        "total_pixels": 15960,
+        "pct_changed": 8.19
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 6441,
+        "total_pixels": 22852,
+        "pct_changed": 28.19
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 1194,
+        "total_pixels": 24492,
+        "pct_changed": 4.88
+      }
+    },
+    "screenshots": [
+      {
+        "name": "04_zoom_pre",
+        "file": "04_zoom_pre.png",
+        "bytes": 94100,
+        "sha256": "54c05f6718b235018d0d1953281adf958526781ce4d737b2c4d9c9ce18ebd200"
+      },
+      {
+        "name": "04_zoom_in",
+        "file": "04_zoom_in.png",
+        "bytes": 94050,
+        "sha256": "9b55997f3bc91d6e52865550a03995f0330ede9f4922a00cf64f1c822ba730d5"
+      },
+      {
+        "name": "04_zoom_out",
+        "file": "04_zoom_out.png",
+        "bytes": 93711,
+        "sha256": "315e1b9c278139650f87ee4d21871b79c816e2de375b552b3b031bc61541b344"
+      }
+    ]
+  },
+  "timescale_zoom": {
+    "drag_vector": {
+      "x1": 350,
+      "y1": 550,
+      "x2": 200,
+      "y2": 550
+    },
+    "diff": {
+      "plot_area": {
+        "changed_pixels": 0,
+        "total_pixels": 282720,
+        "pct_changed": 0.0
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 0,
+        "total_pixels": 22852,
+        "pct_changed": 0.0
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 42,
+        "total_pixels": 24492,
+        "pct_changed": 0.17
+      }
+    },
+    "screenshots": [
+      {
+        "name": "05_timescale_pre",
+        "file": "05_timescale_pre.png",
+        "bytes": 93711,
+        "sha256": "315e1b9c278139650f87ee4d21871b79c816e2de375b552b3b031bc61541b344"
+      },
+      {
+        "name": "05_timescale_post",
+        "file": "05_timescale_post.png",
+        "bytes": 93668,
+        "sha256": "c9c7ce993bc60b5c6d9d0eb87432cc600ebadc166b3fda56bee9f73e319af4c3"
+      }
+    ]
+  },
+  "pricescale_zoom": {
+    "drag_vector": {
+      "x1": 650,
+      "y1": 300,
+      "x2": 650,
+      "y2": 150
+    },
+    "diff": {
+      "plot_area": {
+        "changed_pixels": 33343,
+        "total_pixels": 282720,
+        "pct_changed": 11.79
+      },
+      "price_scale": {
+        "changed_pixels": 6138,
+        "total_pixels": 28768,
+        "pct_changed": 21.34
+      },
+      "time_scale": {
+        "changed_pixels": 1168,
+        "total_pixels": 15960,
+        "pct_changed": 7.32
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 2213,
+        "total_pixels": 22852,
+        "pct_changed": 9.68
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 1382,
+        "total_pixels": 24492,
+        "pct_changed": 5.64
+      }
+    },
+    "screenshots": [
+      {
+        "name": "06_pricescale_pre",
+        "file": "06_pricescale_pre.png",
+        "bytes": 93668,
+        "sha256": "c9c7ce993bc60b5c6d9d0eb87432cc600ebadc166b3fda56bee9f73e319af4c3"
+      },
+      {
+        "name": "06_pricescale_post",
+        "file": "06_pricescale_post.png",
+        "bytes": 92842,
+        "sha256": "ab76974a3e59267add53f1ce3b33721a0b9b7e78e37b5e83822cf01dade049a7"
+      }
+    ]
+  },
+  "chart_resizing": {
+    "dims_before_1034x605": [
+      {
+        "w": 570,
+        "h": 496
+      },
+      {
+        "w": 570,
+        "h": 496
+      },
+      {
+        "w": 58,
+        "h": 496
+      },
+      {
+        "w": 58,
+        "h": 496
+      }
+    ],
+    "dims_after_1280x720": [
+      {
+        "w": 816,
+        "h": 611
+      },
+      {
+        "w": 816,
+        "h": 611
+      },
+      {
+        "w": 58,
+        "h": 611
+      },
+      {
+        "w": 58,
+        "h": 611
+      }
+    ],
+    "screenshots": [
+      {
+        "name": "07_resize_pre",
+        "file": "07_resize_pre.png",
+        "bytes": 92821,
+        "sha256": "f7bd5b95eafbb63544f5c741ca3a7555e358ffa757914dcd71e710cf2d9b5130"
+      },
+      {
+        "name": "07_resize_1280x720",
+        "file": "07_resize_1280x720.png",
+        "bytes": 119919,
+        "sha256": "ce05220086ae8879ea38619413b8d48787cac7e254e9190c2f4a911933a45906"
+      },
+      {
+        "name": "07_resize_reset",
+        "file": "07_resize_reset.png",
+        "bytes": 92801,
+        "sha256": "701d44a4b7d5c7a4ed76c3d976894499534b22618905f6790bee4e74350709e5"
+      }
+    ]
+  },
+  "timeframe_switch": {
+    "diff_5d": {
+      "plot_area": {
+        "changed_pixels": 26925,
+        "total_pixels": 282720,
+        "pct_changed": 9.52
+      },
+      "price_scale": {
+        "changed_pixels": 6137,
+        "total_pixels": 28768,
+        "pct_changed": 21.33
+      },
+      "time_scale": {
+        "changed_pixels": 700,
+        "total_pixels": 15960,
+        "pct_changed": 4.39
+      },
+      "corner_axis": {
+        "changed_pixels": 126,
+        "total_pixels": 1624,
+        "pct_changed": 7.76
+      },
+      "legend_ohlc": {
+        "changed_pixels": 3409,
+        "total_pixels": 22852,
+        "pct_changed": 14.92
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 1542,
+        "total_pixels": 24492,
+        "pct_changed": 6.3
+      }
+    },
+    "diff_1m": {
+      "plot_area": {
+        "changed_pixels": 20178,
+        "total_pixels": 282720,
+        "pct_changed": 7.14
+      },
+      "price_scale": {
+        "changed_pixels": 1663,
+        "total_pixels": 28768,
+        "pct_changed": 5.78
+      },
+      "time_scale": {
+        "changed_pixels": 758,
+        "total_pixels": 15960,
+        "pct_changed": 4.75
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 5811,
+        "total_pixels": 22852,
+        "pct_changed": 25.43
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 1671,
+        "total_pixels": 24492,
+        "pct_changed": 6.82
+      }
+    },
+    "legend_5d": [
+      "A",
+      "Apple Inc",
+      "5",
+      "NASDAQ",
+      "O",
+      "343.36"
+    ],
+    "legend_1m": [
+      "A",
+      "Apple Inc",
+      "30",
+      "NASDAQ",
+      "O",
+      "342.97"
+    ],
+    "screenshots": [
+      {
+        "name": "08_tf_pre",
+        "file": "08_tf_pre.png",
+        "bytes": 92812,
+        "sha256": "eced1ccca393665864b22a05c71a3e57b11374496b606ebec1d1aa2e5021991d"
+      },
+      {
+        "name": "08_tf_5D",
+        "file": "08_tf_5D.png",
+        "bytes": 90095,
+        "sha256": "a300734f36fd218109f52cc681b076880a390bdfa67a6a2e60f54f44d65522dc"
+      },
+      {
+        "name": "08_tf_1M",
+        "file": "08_tf_1M.png",
+        "bytes": 92963,
+        "sha256": "fa93289881f615a49c225a955752abd3d7cbdb3e4e7e52cdbc0c5a619edca8b8"
+      },
+      {
+        "name": "08_tf_reset_1D",
+        "file": "08_tf_reset_1D.png",
+        "bytes": 89384,
+        "sha256": "a2fb56401d75ab376a30d3107de36054fda649da5d6c7d99ea4343538cbd39f0"
+      }
+    ]
+  },
+  "chart_type_change": {
+    "selected_type": "Bars",
+    "diff": {
+      "plot_area": {
+        "changed_pixels": 545,
+        "total_pixels": 282720,
+        "pct_changed": 0.19
+      },
+      "price_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 28768,
+        "pct_changed": 0.0
+      },
+      "time_scale": {
+        "changed_pixels": 0,
+        "total_pixels": 15960,
+        "pct_changed": 0.0
+      },
+      "corner_axis": {
+        "changed_pixels": 0,
+        "total_pixels": 1624,
+        "pct_changed": 0.0
+      },
+      "legend_ohlc": {
+        "changed_pixels": 370,
+        "total_pixels": 22852,
+        "pct_changed": 1.62
+      },
+      "bottom_timeframe_bar": {
+        "changed_pixels": 67,
+        "total_pixels": 24492,
+        "pct_changed": 0.27
+      }
+    },
+    "screenshots": [
+      {
+        "name": "09_type_pre",
+        "file": "09_type_pre.png",
+        "bytes": 89373,
+        "sha256": "239f9b451e99d0b6266229a4247bb6ab225560eae5f62446eae40340bafbd89f"
+      },
+      {
+        "name": "09_type_menu_open",
+        "file": "09_type_menu_open.png",
+        "bytes": 96364,
+        "sha256": "33f229a49f88e662f54738439bc8315525206bbb4d228ffaa14ec1ad7943ead4"
+      },
+      {
+        "name": "09_type_changed_new_style",
+        "file": "09_type_changed_new_style.png",
+        "bytes": 89470,
+        "sha256": "2d009fb405b2029ab8740adbccb4427dd05bb978a74e9f42d62ca317c4cec080"
+      },
+      {
+        "name": "09_type_reverted_candles",
+        "file": "09_type_reverted_candles.png",
+        "bytes": 89408,
+        "sha256": "0785c808de9f26e1c84a9f8ff3e0d6ed39bdc3571f2c8747399222cb8ee9e376"
+      }
+    ]
+  }
+}
